@@ -10,9 +10,15 @@ import UIKit
 
 class HomeViewController: UICollectionViewController {
 
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDefault()
+        setupMenuBar()
     }
 
     private func setupDefault() {
@@ -28,8 +34,15 @@ class HomeViewController: UICollectionViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
+        collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
     }
     
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+    }
 }
 
 

@@ -22,10 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let layout = UICollectionViewFlowLayout()
         window.rootViewController = UINavigationController(rootViewController: HomeViewController(collectionViewLayout: layout))
-        UINavigationBar.appearance().barTintColor = .red
+        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
         
         let statusBarBackgroundView = UIView()
-        statusBarBackgroundView.backgroundColor = .black
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 30, blue: 31)
         
         window.addSubview(statusBarBackgroundView)
         window.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
