@@ -15,7 +15,11 @@ class HomeViewController: UICollectionViewController {
         return mb
     }()
     
-    let settingsLauncher = SettingsLauncher()
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launch = SettingsLauncher()
+        launch.homeController = self
+        return launch
+    }()
     
     var videos: [Video] = []
     
@@ -23,20 +27,11 @@ class HomeViewController: UICollectionViewController {
         super.viewDidLoad()
         fetchVideos()
         setupMenuBar()
-        setupDefault()
+        setupCollectionView()
         setupNavBarButtons()
     }
 
-    private func setupDefault() {
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 110, height: view.frame.height))
-        titleLabel.textColor = .white
-        titleLabel.text = "Home"
-        titleLabel.font = .systemFont(ofSize: 18)
-        
-        navigationItem.titleView = titleLabel
-        
+    private func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
@@ -46,6 +41,15 @@ class HomeViewController: UICollectionViewController {
     }
     
     private func setupNavBarButtons() {
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 110, height: view.frame.height))
+        titleLabel.textColor = .white
+        titleLabel.text = "Home"
+        titleLabel.font = .systemFont(ofSize: 18)
+        
+        navigationItem.titleView = titleLabel
+        
         let searchButton = UIBarButtonItem(image: UIImage(named: "search_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleSearch))
         let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
         
@@ -64,6 +68,16 @@ class HomeViewController: UICollectionViewController {
         view.addSubview(menuBar)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+    }
+    
+    internal func showController(setting: Setting) {
+        let dummyViewController = UIViewController()
+        dummyViewController.view.backgroundColor = .white
+        dummyViewController.navigationItem.title = setting.name
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        self.navigationController?.pushViewController(dummyViewController, animated: true)
     }
     
     private func fetchVideos() {
