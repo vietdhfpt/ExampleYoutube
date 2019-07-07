@@ -21,7 +21,7 @@ class MenuBar: UIView {
     }()
     
     let menuBarCell = "MenuBarCell"
-    let iconNames = ["icons8-home", "icons8-person", "icons8-youtube", "icons8-fire"]
+    let iconNames = ["home", "trending", "subscriptions", "account"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
