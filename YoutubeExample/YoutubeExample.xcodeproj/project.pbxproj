@@ -21,6 +21,7 @@
 		18C3F06B22C592F70071ED5C /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C3F06A22C592F70071ED5C /* BaseCell.swift */; };
 		18E71DEE22C51A9B0043C94E /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71DED22C51A9B0043C94E /* VideoCell.swift */; };
 		18E71DF122C532D50043C94E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71DF022C532D50043C94E /* Extensions.swift */; };
+		845BF20522D3423400D10280 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BF20422D3423400D10280 /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		18C3F06A22C592F70071ED5C /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		18E71DED22C51A9B0043C94E /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		18E71DF022C532D50043C94E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		845BF20422D3423400D10280 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		1840313C22C3BFB5005E8568 /* YoutubeExample */ = {
 			isa = PBXGroup;
 			children = (
+				845BF20322D3421F00D10280 /* ApiService */,
 				184ECE2722C65B6E00F14CE0 /* Model */,
 				18C3F06722C58FC60071ED5C /* CustomCells */,
 				18C3F06622C58FBD0071ED5C /* Controllers */,
@@ -129,6 +132,14 @@
 				18E71DF022C532D50043C94E /* Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		845BF20322D3421F00D10280 /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				845BF20422D3423400D10280 /* ApiService.swift */,
+			);
+			path = ApiService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +215,7 @@
 			files = (
 				1840314022C3BFB5005E8568 /* HomeViewController.swift in Sources */,
 				1840313E22C3BFB5005E8568 /* AppDelegate.swift in Sources */,
+				845BF20522D3423400D10280 /* ApiService.swift in Sources */,
 				1881C1F722CE61D100ECD57E /* SettingsLauncher.swift in Sources */,
 				18C3F06922C592930071ED5C /* MenuBarCell.swift in Sources */,
 				18E71DEE22C51A9B0043C94E /* VideoCell.swift in Sources */,
@@ -360,13 +372,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = YoutubeExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dhv.YoutubeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -377,13 +390,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = YoutubeExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dhv.YoutubeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

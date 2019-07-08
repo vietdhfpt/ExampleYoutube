@@ -8,11 +8,20 @@
 
 import Foundation
 
+enum SettingsName: String {
+    case Settings = "Settings"
+    case Term = "Term & Privacy policy"
+    case Feedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
+    case Cancel = "Cancel"
+}
+
 class Setting: NSObject {
-    let name: String
+    let name: SettingsName
     let imageName: String
     
-    init(name: String, imageName: String) {
+    init(name: SettingsName, imageName: String) {
         self.name = name
         self.imageName = imageName
     }

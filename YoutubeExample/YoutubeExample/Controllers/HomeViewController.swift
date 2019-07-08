@@ -43,9 +43,9 @@ class HomeViewController: UICollectionViewController {
     private func setupNavBarButtons() {
         self.navigationController?.navigationBar.isTranslucent = false
         
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 110, height: view.frame.height))
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
         titleLabel.textColor = .white
-        titleLabel.text = "Home"
+        titleLabel.text = " Home"
         titleLabel.font = .systemFont(ofSize: 18)
         
         navigationItem.titleView = titleLabel
@@ -65,15 +65,24 @@ class HomeViewController: UICollectionViewController {
     }
     
     private func setupMenuBar() {
+        self.navigationController?.hidesBarsOnSwipe = true
+        
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        view.addSubview(redView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)
+        
         view.addSubview(menuBar)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
     internal func showController(setting: Setting) {
         let dummyViewController = UIViewController()
         dummyViewController.view.backgroundColor = .white
-        dummyViewController.navigationItem.title = setting.name
+        dummyViewController.navigationItem.title = setting.name.rawValue
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
@@ -81,42 +90,10 @@ class HomeViewController: UICollectionViewController {
     }
     
     private func fetchVideos() {
-        guard let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json") else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                return
-            }
-            
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                for dict in json as! [[String: AnyObject]] {
-                    let video = Video()
-                    video.title = dict["title"] as? String
-                    video.thumbnailImageName = dict["thumbnail_image_name"] as? String
-                    video.numberOfViews = dict["number_of_views"] as? NSNumber
-                    
-                    let channelDict = dict["channel"] as! [String: AnyObject]
-                    let channel = Channel()
-                    channel.profileImageName = channelDict["profile_image_name"] as? String
-                    channel.name = channelDict["name"] as? String
-                    
-                    video.channel = channel
-                    
-                    self.videos.append(video)
-                }
-                
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
-                }
-            } catch let jsonError {
-                print(jsonError)
-            }
-        }.resume()
+        ApiService.shared.fetVideos { (videos) in
+            self.videos = videos
+            self.collectionView.reloadData()
+        }
     }
 }
 

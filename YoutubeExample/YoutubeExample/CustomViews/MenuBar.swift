@@ -22,6 +22,7 @@ class MenuBar: UIView {
     
     let menuBarCell = "MenuBarCell"
     let iconNames = ["home", "trending", "subscriptions", "account"]
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,10 +34,26 @@ class MenuBar: UIView {
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         
         collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .left)
+        
+        self.setupHorizontalBar()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupHorizontalBar() {
+        let horizontalView = UIView()
+        horizontalView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        horizontalView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(horizontalView)
+        
+        horizontalBarLeftAnchorConstraint = horizontalView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchorConstraint?.isActive = true
+        
+        horizontalView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalView.heightAnchor.constraint(equalToConstant: 4).isActive = true
     }
     
 }
@@ -55,7 +72,14 @@ extension MenuBar: UICollectionViewDataSource {
 }
 
 extension MenuBar: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.row) * frame.width / 4
+        self.horizontalBarLeftAnchorConstraint?.constant = x
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
 
 extension MenuBar: UICollectionViewDelegateFlowLayout {
