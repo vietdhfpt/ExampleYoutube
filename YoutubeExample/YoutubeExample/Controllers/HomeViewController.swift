@@ -61,7 +61,7 @@ class HomeViewController: UICollectionViewController {
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
         titleLabel.textColor = .white
         titleLabel.text = " Home"
-        titleLabel.font = .systemFont(ofSize: 18)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         
         navigationItem.titleView = titleLabel
         
