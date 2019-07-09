@@ -23,6 +23,7 @@ class MenuBar: UIView {
     let menuBarCell = "MenuBarCell"
     let iconNames = ["home", "trending", "subscriptions", "account"]
     var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    var homeViewController: HomeViewController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,12 +74,7 @@ extension MenuBar: UICollectionViewDataSource {
 
 extension MenuBar: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.row) * frame.width / 4
-        self.horizontalBarLeftAnchorConstraint?.constant = x
-        
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+        self.homeViewController?.scrollToMenuIndex(menuIndex: indexPath.item)
     }
 }
 
