@@ -23,14 +23,17 @@ class HomeViewController: UICollectionViewController {
     }()
     
     var videos: [Video] = []
-    let cellId = "CellId"
+    let feedCell = "FeedCell"
+    let trendingCell = "TrendingCell"
+    let subscriptionCell = "SubscriptionCell"
+    let accountCell = "AccountCell"
+    let titles: [String] = ["Home", "Trending", "Subscriptions", "Account"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchVideos()
-        setupMenuBar()
         setupCollectionView()
         setupNavBarButtons()
+        setupMenuBar()
     }
 
     private func setupCollectionView() {
@@ -41,7 +44,11 @@ class HomeViewController: UICollectionViewController {
         
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: self.feedCell)
+        collectionView.register(TrendingCell.self, forCellWithReuseIdentifier: self.trendingCell)
+        collectionView.register(SubscriptionCell.self, forCellWithReuseIdentifier: self.subscriptionCell)
+        collectionView.register(AccountCell.self, forCellWithReuseIdentifier: self.accountCell)
+        
         collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView.showsVerticalScrollIndicator = false
@@ -91,6 +98,7 @@ class HomeViewController: UICollectionViewController {
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        setTitleForIndex(index: menuIndex)
     }
     
     internal func showController(setting: Setting) {
@@ -103,13 +111,15 @@ class HomeViewController: UICollectionViewController {
         self.navigationController?.pushViewController(dummyViewController, animated: true)
     }
     
-    private func fetchVideos() {
-        ApiService.shared.fetVideos { (videos) in
-            self.videos = videos
-            self.collectionView.reloadData()
+    private func setTitleForIndex(index: Int) {
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = " " + self.titles[index]
         }
     }
-    
+}
+
+// MARK: - Handle scrolling
+extension HomeViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
     }
@@ -118,6 +128,8 @@ class HomeViewController: UICollectionViewController {
         let index = targetContentOffset.pointee.x / view.frame.width
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
+        
+        setTitleForIndex(index: Int(index))
     }
 }
 
@@ -128,32 +140,25 @@ extension HomeViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        let colors: [UIColor] = [.lightGray, .blue, .purple, .green]
-        cell.backgroundColor = colors[indexPath.row]
-        return cell
+        var identifier: String
+        switch indexPath.item {
+        case 0:
+            identifier = self.feedCell
+        case 1:
+            identifier = self.trendingCell
+        case 2:
+            identifier = self.subscriptionCell
+        default:
+            identifier = self.accountCell
+        }
+        
+        return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return videos.count
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCell
-//        guard indexPath.row < videos.count else { return cell }
-//        cell.video = videos[indexPath.row]
-//        return cell
-//    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - 50) // Minus 50 is height of menu bar
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let height = (view.bounds.width - 32) * 9 / 16
-//        return CGSize(width: self.view.bounds.width, height: height + 16 + 88)
-//    }
 }

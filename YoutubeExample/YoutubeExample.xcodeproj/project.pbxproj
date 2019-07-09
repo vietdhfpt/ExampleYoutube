@@ -22,6 +22,10 @@
 		18E71DEE22C51A9B0043C94E /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71DED22C51A9B0043C94E /* VideoCell.swift */; };
 		18E71DF122C532D50043C94E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E71DF022C532D50043C94E /* Extensions.swift */; };
 		845BF20522D3423400D10280 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BF20422D3423400D10280 /* ApiService.swift */; };
+		84A6BF9422D4632700264BC6 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BF9322D4632700264BC6 /* FeedCell.swift */; };
+		84A6BF9622D4897E00264BC6 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BF9522D4897E00264BC6 /* TrendingCell.swift */; };
+		84A6BF9822D48B7300264BC6 /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BF9722D48B7300264BC6 /* SubscriptionCell.swift */; };
+		84A6BF9A22D48B8600264BC6 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BF9922D48B8600264BC6 /* AccountCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		18E71DED22C51A9B0043C94E /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		18E71DF022C532D50043C94E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		845BF20422D3423400D10280 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		84A6BF9322D4632700264BC6 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		84A6BF9522D4897E00264BC6 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
+		84A6BF9722D48B7300264BC6 /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
+		84A6BF9922D48B8600264BC6 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,10 @@
 				18C3F06822C592930071ED5C /* MenuBarCell.swift */,
 				18C3F06A22C592F70071ED5C /* BaseCell.swift */,
 				18A5D47222CFA81F00DF9517 /* SettingCell.swift */,
+				84A6BF9322D4632700264BC6 /* FeedCell.swift */,
+				84A6BF9522D4897E00264BC6 /* TrendingCell.swift */,
+				84A6BF9722D48B7300264BC6 /* SubscriptionCell.swift */,
+				84A6BF9922D48B8600264BC6 /* AccountCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -213,12 +225,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A6BF9622D4897E00264BC6 /* TrendingCell.swift in Sources */,
 				1840314022C3BFB5005E8568 /* HomeViewController.swift in Sources */,
+				84A6BF9422D4632700264BC6 /* FeedCell.swift in Sources */,
 				1840313E22C3BFB5005E8568 /* AppDelegate.swift in Sources */,
 				845BF20522D3423400D10280 /* ApiService.swift in Sources */,
 				1881C1F722CE61D100ECD57E /* SettingsLauncher.swift in Sources */,
 				18C3F06922C592930071ED5C /* MenuBarCell.swift in Sources */,
+				84A6BF9822D48B7300264BC6 /* SubscriptionCell.swift in Sources */,
 				18E71DEE22C51A9B0043C94E /* VideoCell.swift in Sources */,
+				84A6BF9A22D48B8600264BC6 /* AccountCell.swift in Sources */,
 				18C3F06B22C592F70071ED5C /* BaseCell.swift in Sources */,
 				18A5D47522CFAF0E00DF9517 /* Setting.swift in Sources */,
 				184ECE2922C65B7F00F14CE0 /* Video.swift in Sources */,
