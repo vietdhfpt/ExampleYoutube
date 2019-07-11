@@ -36,6 +36,7 @@ class VideoCell: BaseCell {
     let subtitleTextView: UITextView = {
         let textView = UITextView()
         textView.textColor = .lightGray
+        textView.isEditable = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
         return textView

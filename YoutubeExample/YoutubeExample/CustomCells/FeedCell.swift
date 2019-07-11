@@ -59,7 +59,10 @@ extension FeedCell: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension FeedCell: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let videoLauncher = VideoLauncher()
+        videoLauncher.showVideoPlayer()
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
