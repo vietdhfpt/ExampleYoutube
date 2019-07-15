@@ -45,19 +45,17 @@ class VideoPlayerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupPlayerView { isSuccess in
-            if isSuccess {
-                activityIndicatorView.stopAnimating()
-            }
-        }
         
+        // Add controls container view
         controlsContainerView.frame = frame
         addSubview(controlsContainerView)
         
+        // Add activity indicator
         controlsContainerView.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: controlsContainerView.centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: controlsContainerView.centerYAnchor).isActive = true
         
+        // Add button play and pause
         controlsContainerView.addSubview(pausePlayButton)
         pausePlayButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -71,7 +69,7 @@ class VideoPlayerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupPlayerView(completion: ((_ isSuccess: Bool) -> Void)) {
+    func setupPlayerView() {
         if let urlString = URL(string: "https://firebasestorage.googleapis.com/v0/b/gameofchats-762ca.appspot.com/o/message_movies%2F12323439-9729-4941-BA07-2BAE970967C7.mov?alt=media&token=3e37a093-3bc8-410f-84d3-38332af9c726") {
             
             asset = AVAsset(url: urlString)
@@ -94,7 +92,6 @@ class VideoPlayerView: UIView {
             let playerLayer = AVPlayerLayer(player: player)
             self.layer.addSublayer(playerLayer)
             playerLayer.frame = self.frame
-
         }
     }
     
